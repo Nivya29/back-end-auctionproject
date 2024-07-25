@@ -3,7 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const connectDb = require('./config/db');
-const authRoutes = require('./routes/authRoutes'); // Import authentication routes
+const authRoutes = require('./routes/authRoutes'); 
 const multer = require('multer');
 const path = require('path');
 dotenv.config();
@@ -22,10 +22,10 @@ app.get('/', (req, res) => {
 
 const upload = multer({ dest: 'uploads/' });
 
-app.use(bodyParser.json()); // For JSON data
-app.use(bodyParser.urlencoded({ extended: true })); // For URL-encoded data
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true })); 
 
-// POST /api/auctions route with file handling
+
 app.post('/api/auctions', upload.single('image'), async (req, res) => {
   const { title, description, currentBid, endTime } = req.body;
   const image = req.file ? req.file.filename : null;
@@ -40,8 +40,8 @@ app.post('/api/auctions', upload.single('image'), async (req, res) => {
 });
 
 
-// Use authRoutes for authentication-related routes
-app.use('/api/auth', authRoutes); // Mount the authentication routes at /api/auth
+
+app.use('/api/auth', authRoutes); 
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
